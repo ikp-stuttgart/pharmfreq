@@ -4,4 +4,4 @@ Polymorphisms in drug metabolizing enzymes, drug transporters, and major histoco
 
 The resource is published and can be accessed here: xxxx. Please cite the following paper if you use the data, website, or code.
 
-Here the code and the database file of Pharmfreq.com are stored.
+Here the code and the database files for Pharmfreq.com as well as the script to produce the figures in the manuscript are stored. 
