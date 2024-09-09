@@ -255,9 +255,17 @@ ggsave(paste0(dir_plots, "Figure4A.pdf"), width = 8.27, height  = 14)
 # Figure 4B ---------------------------------------------------------------
 # ####################################### ---------------------------------
 world<- map_data("world")
+# studies per gene and subgroup
+data$data_on_studies_per_gg <- data$freq %>%
+  distinct(pmid, subgroup, gene) %>%
+  count(subgroup, gene) %>%
+  group_by(subgroup) %>%
+  mutate(value = n/sum(n)) %>%
+  ungroup()
+
 
 # data for scatter plot
-data_on_studies_per_gg_scatter <- data_on_studies_per_gg %>% 
+data_on_studies_per_gg_scatter <- data$data_on_studies_per_gg %>% 
   select(-n) %>% 
   pivot_wider(names_from = gene, values_from = value, values_fill = 0) %>%  
   mutate(long = c(70.491372, 123.26095, 28.486746, 4.564534, -100.4821, 150.208591, -55.944591, 24.968774),
@@ -271,11 +279,11 @@ ggplot(world, aes(long, lat)) +
   theme_void()+
   geom_scatterpie(aes(x=long, y=lat-15, group=subgroup, r=radius),
                   data=data_on_studies_per_gg_scatter, 
-                  cols=names(data_on_studies_per_gg_scatter)[2:15], color=NA)+
+                  cols=names(data_on_studies_per_gg_scatter)[2:20], color=NA)+
   geom_label(aes(x=long, y=lat, label=subgroup),  data=data_on_studies_per_gg_scatter)+
   scale_fill_manual("",values = c(ggsci::pal_locuszoom(palette = "default")(7),
                                   ggsci::pal_jama(palette = "default")(7)[-2],
-                                  ggsci::pal_futurama(palette = "planetexpress")(1)
+                                  ggsci::pal_futurama(palette = "planetexpress")(6)
   )) +
   theme(legend.position = "bottom")
 ggsave(paste0(dir_plots, "Figure4B.pdf"), height = 8.27, width  = 11.69)
@@ -283,23 +291,19 @@ ggsave(paste0(dir_plots, "Figure4B.pdf"), height = 8.27, width  = 11.69)
 # ####################################### ---------------------------------
 # Figure 4C ---------------------------------------------------------------
 # ####################################### ---------------------------------
-data$drug_gene_table <- read_excel("data/gene_drug_table_pharmgkb.xlsx", 3)
-# studies per gene and subgroup
-data$data_on_studies_per_gg <- data$freq %>%
-  distinct(pmid, subgroup, gene) %>%
-  count(subgroup, gene) %>%
-  group_by(subgroup) %>%
-  mutate(value = n/sum(n)) %>%
-  ungroup()
+data$drug_gene_table <- read_excel("../pharmfreq_pub/data/gene_drug_table_pharmgkb.xlsx", 1)
 
 # scale n
 tot <- data$data_on_studies_per_gg %>% 
   select(gene, subgroup, n) %>% 
   group_by(gene) %>% 
-  filter(n>10) %>% 
-  summarise(total = sum(n)) 
+  # mutate(n_total = sum(n)) %>% 
+  # filter(n<10) %>%
+  summarise(total = sum(n)) %>%  
+  filter(total>5) 
 
-ta_transform <- ta %>% 
+
+ta_transform <- data$drug_gene_table %>% 
   count(gene, therapeutic_area) %>% 
   inner_join(tot) %>% 
   group_by(gene) %>% 
@@ -318,11 +322,16 @@ p_right <- ta_transform %>%
   theme_void()+
   scale_fill_manual("",values = c(ggsci::pal_locuszoom(palette = "default")(7),
                                   ggsci::pal_jama(palette = "default")(7)[-2],
-                                  ggsci::pal_futurama(palette = "planetexpress")(1)
+                                  ggsci::pal_futurama(palette = "planetexpress")(6)
   )) 
 
-p_left <- data_on_studies_per_gg %>% 
-  filter(n>10) %>% 
+p_left <-  data$data_on_studies_per_gg %>% 
+  group_by(gene) %>% 
+  # mutate(n_total = sum(n)) %>% 
+  # filter(n<10) %>%
+  mutate(total = sum(n)) %>%  
+  filter(total>5) %>% 
+  ungroup() %>%
   inner_join(tot) %>%
   ggplot(aes(y = n, axis1 = subgroup, axis2 = gene)) +
   geom_alluvium(aes(fill = gene), width = 1/20, alpha=0.8,show.legend = F)+
@@ -336,10 +345,10 @@ p_left <- data_on_studies_per_gg %>%
   theme_void()+
   scale_fill_manual("",values = c(ggsci::pal_locuszoom(palette = "default")(7),
                                   ggsci::pal_jama(palette = "default")(7)[-2],
-                                  ggsci::pal_futurama(palette = "planetexpress")(1)
+                                  ggsci::pal_futurama(palette = "planetexpress")(6)
   ))
 cowplot::plot_grid(p_left, p_right)
-ggsave(paste0(dir_plots, "Figure4C.pdf"), height = 8.27, width  = 11.69)
+ggsave(paste0(dir_plots, "Figure4C_all_genes.pdf"), height = 8.27, width  = 11.69)
 # The figure is then finally styled using software like inkscape or illustrator
 
 # ####################################### ---------------------------------
