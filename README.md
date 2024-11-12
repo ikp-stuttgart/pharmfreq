@@ -1,5 +1,14 @@
-
 ![Pharmfreq](www/Logo_PharmFreq.svg)
+
+   <p align="center">
+   <a href="https://apps.crossref.org/pendingpub/pendingpub.html?doi=10.1093%2Fnar%2Fgkae1016"><img src="https://img.shields.io/badge/Published%20in-Nature%20Communications-red.svg" alt="Accepted in Nucleic Acids Research" /></a>
+   <br/>
+   <i>The <b>Pharm</b>acogenetic allele <b>Freq</b>uency (<b>PharmFreq</b>) database is a collated repository and search tool for country-specific pharmacogenetic allele frequency at a global scale. It allows users to explore the ethnogeographic variability of genetically encoded drug response differences and identify outlier populations that might benefit from therapeutic adjustments.</i>
+   </p>
+
+
+
+
 
 # Pharmfreq
 A repository and search tool for worldwide country-specific pharmacogenetic allele frequencies
@@ -14,3 +23,9 @@ Please cite the following paper if you use the data, website, or code. The resou
 
 >PharmFreq: a comprehensive atlas of ethnogeographic allelic variation in clinically important pharmacogenes   
 [DOI: 10.1093/nar/gkae1016](https://apps.crossref.org/pendingpub/pendingpub.html?doi=10.1093%2Fnar%2Fgkae1016).
+
+
+
+## Contact & Bug Reports
+Mail to [Roman Tremmel](mailto:roman.tremmel@ikp-stuttgart.de) or open a [GitHub issue](https://https://github.com/ikp-stuttgart/pharmfreq/issues).
+
