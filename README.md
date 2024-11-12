@@ -16,8 +16,11 @@ A repository and search tool for worldwide country-specific pharmacogenetic alle
 Polymorphisms in drug metabolizing enzymes, drug transporters, and major histocompatibility complex genes cause significant inter-individual differences in drug efficacy and safety. The pattern and complexity of these variations differ across populations. PharmFreq is a global repository of pharmacogenetic frequency data from over 10 million individuals across hundreds of countries, aggregating data on pharmacogenomic alleles from over 1200 studies. The majority of studies focus on East Asian and European populations. The number of studies per country correlates with population size and GDP, with significant coverage disparities. All data is accessible via an interactive web dashboard at pharmfreq.com, providing a comprehensive resource for exploring pharmacogenetic diversity and guiding research in underrepresented populations.
 
 >[!NOTE]  
-Here a light version of the code and the database files used in the publication are stored. The most recent version of the database and website can be accessed here [www.pharmfreq.com](https://www.pharmfreq.com).
-
+This repository contains a lightweight version of the code and database files used in our publication. For access to the most recent version of the database and the full web application, please visit [www.pharmfreq.com](https://www.pharmfreq.com).  
+>### What's Included
+> - Code: A streamlined version of the shiny app.
+> - Inital database files.  
+>For detailed documentation and updates and most recent version of the database, refer to the main website linked above.
 
 Please cite the following paper if you use the data, website, or code. The resource is published and can be accessed here:
 
