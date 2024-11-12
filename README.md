@@ -11,4 +11,5 @@ Here a light version of the code and the database files used in the publication 
 Please cite the following paper if you use the data, website, or code. The resource is published and can be accessed here:
 
 PharmFreq: a comprehensive atlas of ethnogeographic allelic variation in clinically important pharmacogenes
+
 [DOI: 10.1093/nar/gkae1016](10.1093/nar/gkae1016).
