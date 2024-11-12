@@ -1,4 +1,5 @@
-tag_head <- shiny::tags$head(tags$script('var dimension = [0, 0];
+tag_head <- shiny::tags$head(
+  tags$script('var dimension = [0, 0];
                                 $(document).on("shiny:connected", function(e) {
                                     dimension[0] = window.innerWidth;
                                     dimension[1] = window.innerHeight;
@@ -23,6 +24,5 @@ tag_head <- shiny::tags$head(tags$script('var dimension = [0, 0];
                 $("#tabset_tool-Highriskgenotypefrequency-tab").addClass("active show");
                 $("#tabset_tool-Highriskgenotypefrequency").addClass("active show");
                });'),
-tags$style(".dropdown-header{color: #000000}"),
-) #  end of head
-
+  tags$style(".dropdown-header{color: #000000}"),
+)
